@@ -1,0 +1,39 @@
+class Element {
+    int data;
+    Element next;
+
+    Element(int x) {
+        data = x;
+    }
+}
+
+class Queue {
+    Element first;
+    Element last;
+
+    // Метод вставки елементу до черги
+    void enqueue(int x) {
+        Element newElement = new Element(x);
+        if (first == null) {
+            first = newElement;
+            last = newElement;
+        } else {
+            last.next = newElement;
+            last = newElement;
+        }
+    }
+
+    // Метод вилучення одного елементу з черги
+    int dequeue() {
+        if (first == null) {
+            // Черга порожня, можна викинути виключення або повернути спеціальне значення
+            throw new IllegalStateException("Черга порожня");
+        } else {
+            int dequeuedData = first.data;
+            first = first.next;
+            if (first == null) {
+                last = null;
+            }
+            return dequeuedData;
+        }
+    }
